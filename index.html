@@ -1,0 +1,945 @@
+ <!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Cafetería Escolar</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            background-color: #f8f0f7;
+            color: #333;
+        }
+
+        /* ENCABEZADO */
+
+        header {
+            background: linear-gradient(135deg, #e696db, #f3a0de);
+            color: white;
+            padding: 25px;
+            text-align: center;
+        }
+
+        .titulo {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .titulo img {
+            width: 70px;
+            height: 70px;
+            object-fit: cover;
+            border-radius: 12px;
+            border: 3px solid white;
+            margin: 0;
+        }
+
+        .titulo h1 {
+            margin: 0;
+            font-size: 32px;
+        }
+
+        .titulo p {
+            margin: 8px 0 0;
+        }
+
+        /* MENÚ DE NAVEGACIÓN */
+
+        nav {
+            background-color: white;
+            padding: 15px;
+            text-align: center;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        nav a {
+            color: #9d4d91;
+            text-decoration: none;
+            font-weight: bold;
+            margin: 0 15px;
+        }
+
+        nav a:hover {
+            color: #e696db;
+        }
+
+        /* CONTENIDO */
+
+        main {
+            max-width: 1000px;
+            margin: auto;
+            padding: 20px;
+        }
+
+        section {
+            background-color: white;
+            padding: 25px;
+            margin-bottom: 25px;
+            border-radius: 15px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+        }
+
+        h2 {
+            text-align: center;
+            color: #9d4d91;
+        }
+
+        /* PRODUCTOS */
+
+        .productos {
+            display: grid;
+            grid-template-columns: repeat(
+                auto-fit,
+                minmax(200px, 1fr)
+            );
+
+            gap: 20px;
+        }
+
+        .producto {
+            border: 2px solid #e696db;
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            background-color: #fff8fd;
+        }
+
+        .producto h3 {
+            color: #9d4d91;
+        }
+
+        .precio {
+            font-size: 20px;
+            font-weight: bold;
+            margin: 10px;
+        }
+
+        .producto button {
+            background-color: #dbb6d8;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 7px;
+            cursor: pointer;
+        }
+
+        .producto button:hover {
+            background-color: #b875ad;
+        }
+
+        /* TABLA DEL PEDIDO */
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th {
+            background-color: #eea8e5;
+            color: white;
+            padding: 12px;
+        }
+
+        td {
+            border: 1px solid #d3a6ca;
+            padding: 10px;
+            text-align: center;
+        }
+
+        #total {
+            font-size: 20px;
+            font-weight: bold;
+            text-align: right;
+            margin-top: 15px;
+            color: #9d4d91;
+        }
+
+        /* BOTONES DEL PEDIDO */
+
+        .botones-pedido {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+
+        .btn-comprar {
+            background-color: #9d4d91;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        .btn-comprar:hover {
+            background-color: #713567;
+        }
+
+        .btn-limpiar {
+            background-color: #999;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        .btn-limpiar:hover {
+            background-color: #666;
+        }
+
+        /* FORMULARIO */
+
+        form {
+            max-width: 500px;
+            margin: auto;
+            padding: 20px;
+            background-color: #f3e4f1;
+            border-radius: 12px;
+        }
+
+        label {
+            display: block;
+            margin-top: 12px;
+            font-weight: bold;
+            color: #6f3867;
+        }
+
+        input,
+        textarea {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #c99ac2;
+            border-radius: 6px;
+        }
+
+        textarea {
+            height: 100px;
+            resize: vertical;
+        }
+
+        .btn-enviar {
+            width: 100%;
+            margin-top: 20px;
+            background-color: #dbb6d8;
+            color: white;
+            padding: 12px;
+            border: none;
+            border-radius: 7px;
+            cursor: pointer;
+        }
+
+        .btn-enviar:hover {
+            background-color: #b875ad;
+        }
+
+        #mensajeFormulario {
+            text-align: center;
+            font-weight: bold;
+            margin-top: 15px;
+        }
+
+        /* MENSAJES */
+
+        .mensaje {
+            text-align: center;
+            font-weight: bold;
+            margin-top: 15px;
+            color: #9d4d91;
+        }
+
+        /* PIE DE PÁGINA */
+
+        footer {
+            background-color: #e696db;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            margin-top: 20px;
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- ENCABEZADO -->
+
+    <header>
+
+        <div class="titulo">
+
+            <img
+                src="coffie.jpg"
+                alt="Logo de la cafetería"
+            >
+
+            <div>
+
+                <h1>
+                    Cafetería Escolar
+                </h1>
+
+                <p>
+                    Alimentos y bebidas para estudiantes
+                </p>
+
+            </div>
+
+        </div>
+
+    </header>
+
+
+    <!-- NAVEGACIÓN -->
+
+    <nav>
+
+        <a href="#menu">
+            Menú
+        </a>
+
+        <a href="#pedido">
+            Pedido
+        </a>
+
+        <a href="#contacto">
+            Contacto
+        </a>
+
+    </nav>
+
+
+    <main>
+
+
+        <!-- MENÚ -->
+
+        <section id="menu">
+
+            <h2>
+                Menú
+            </h2>
+
+
+            <div class="productos">
+
+
+                <!-- HAMBURGUESA -->
+
+                <div class="producto">
+
+                    <h3>
+                        Hamburguesa
+                    </h3>
+
+                    <p>
+                        Hamburguesa preparada para estudiantes.
+                    </p>
+
+                    <p class="precio">
+                        $45
+                    </p>
+
+                    <button
+                        type="button"
+                        onclick="agregarProducto('Hamburguesa', 45)"
+                    >
+                        Agregar
+                    </button>
+
+                </div>
+
+
+                <!-- JUGO -->
+
+                <div class="producto">
+
+                    <h3>
+                        Jugo
+                    </h3>
+
+                    <p>
+                        Jugo fresco.
+                    </p>
+
+                    <p class="precio">
+                        $20
+                    </p>
+
+                    <button
+                        type="button"
+                        onclick="agregarProducto('Jugo', 20)"
+                    >
+                        Agregar
+                    </button>
+
+                </div>
+
+
+                <!-- SANDWICH -->
+
+                <div class="producto">
+
+                    <h3>
+                        Sandwich
+                    </h3>
+
+                    <p>
+                        Sandwich preparado.
+                    </p>
+
+                    <p class="precio">
+                        $30
+                    </p>
+
+                    <button
+                        type="button"
+                        onclick="agregarProducto('Sandwich', 30)"
+                    >
+                        Agregar
+                    </button>
+
+                </div>
+
+
+            </div>
+
+        </section>
+
+
+        <!-- PEDIDO -->
+
+        <section id="pedido">
+
+            <h2>
+                Mi pedido
+            </h2>
+
+
+            <table>
+
+                <thead>
+
+                    <tr>
+
+                        <th>
+                            Producto
+                        </th>
+
+                        <th>
+                            Precio
+                        </th>
+
+                        <th>
+                            Cantidad
+                        </th>
+
+                        <th>
+                            Subtotal
+                        </th>
+
+                    </tr>
+
+                </thead>
+
+
+                <tbody id="tablaPedido">
+
+                    <tr>
+
+                        <td colspan="4">
+                            No hay productos seleccionados.
+                        </td>
+
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+
+            <p id="total">
+                Total: $0
+            </p>
+
+
+            <!-- BOTONES -->
+
+            <div class="botones-pedido">
+
+                <button
+                    type="button"
+                    class="btn-comprar"
+                    onclick="realizarCompra()"
+                >
+                    Realizar compra
+                </button>
+
+
+                <button
+                    type="button"
+                    class="btn-limpiar"
+                    onclick="limpiarPedido()"
+                >
+                    Limpiar pedido
+                </button>
+
+            </div>
+
+
+            <p
+                id="mensajeCompra"
+                class="mensaje"
+            ></p>
+
+
+        </section>
+
+
+        <!-- CONTACTO -->
+
+        <section id="contacto">
+
+            <h2>
+                Contacto
+            </h2>
+
+
+            <form id="formularioContacto">
+
+
+                <label for="nombre">
+                    Nombre:
+                </label>
+
+                <input
+                    type="text"
+                    id="nombre"
+                    name="nombre"
+                    required
+                    placeholder="Escribe tu nombre"
+                >
+
+
+                <label for="correo">
+                    Correo:
+                </label>
+
+                <input
+                    type="email"
+                    id="correo"
+                    name="correo"
+                    required
+                    placeholder="ejemplo@correo.com"
+                >
+
+
+                <label for="mensaje">
+                    Mensaje:
+                </label>
+
+                <textarea
+                    id="mensaje"
+                    name="mensaje"
+                    required
+                    placeholder="Escribe tu mensaje"
+                ></textarea>
+
+
+                <button
+                    type="submit"
+                    class="btn-enviar"
+                >
+                    Enviar
+                </button>
+
+
+                <p id="mensajeFormulario"></p>
+
+
+            </form>
+
+        </section>
+
+
+    </main>
+
+
+    <!-- PIE DE PÁGINA -->
+
+    <footer>
+
+        <p>
+            Cafetería Escolar © 2026
+        </p>
+
+    </footer>
+
+
+    <script>
+
+
+        /* =========================================
+           LISTA DE PRODUCTOS SELECCIONADOS
+        ========================================= */
+
+        let pedido = [];
+
+
+        /* =========================================
+           AGREGAR PRODUCTO
+        ========================================= */
+
+        function agregarProducto(nombre, precio) {
+
+
+            let productoExistente =
+                pedido.find(
+                    producto =>
+                        producto.nombre === nombre
+                );
+
+
+            if (productoExistente) {
+
+                productoExistente.cantidad++;
+
+            }
+
+            else {
+
+                pedido.push({
+
+                    nombre: nombre,
+
+                    precio: precio,
+
+                    cantidad: 1
+
+                });
+
+            }
+
+
+            mostrarPedido();
+
+
+            document.getElementById(
+                "mensajeCompra"
+            ).textContent =
+                nombre + " agregado al pedido.";
+
+        }
+
+
+        /* =========================================
+           MOSTRAR PEDIDO
+        ========================================= */
+
+        function mostrarPedido() {
+
+
+            const tabla =
+                document.getElementById(
+                    "tablaPedido"
+                );
+
+
+            tabla.innerHTML = "";
+
+
+            if (pedido.length === 0) {
+
+
+                tabla.innerHTML = `
+
+                    <tr>
+
+                        <td colspan="4">
+
+                            No hay productos seleccionados.
+
+                        </td>
+
+                    </tr>
+
+                `;
+
+
+                document.getElementById(
+                    "total"
+                ).textContent =
+                    "Total: $0";
+
+
+                return;
+
+            }
+
+
+            let total = 0;
+
+
+            pedido.forEach(producto => {
+
+
+                let subtotal =
+                    producto.precio *
+                    producto.cantidad;
+
+
+                total += subtotal;
+
+
+                tabla.innerHTML += `
+
+                    <tr>
+
+                        <td>
+                            ${producto.nombre}
+                        </td>
+
+                        <td>
+                            $${producto.precio}
+                        </td>
+
+                        <td>
+                            ${producto.cantidad}
+                        </td>
+
+                        <td>
+                            $${subtotal}
+                        </td>
+
+                    </tr>
+
+                `;
+
+            });
+
+
+            document.getElementById(
+                "total"
+            ).textContent =
+                "Total: $" + total;
+
+        }
+
+
+        /* =========================================
+           REALIZAR COMPRA
+        ========================================= */
+
+        function realizarCompra() {
+
+
+            const mensaje =
+                document.getElementById(
+                    "mensajeCompra"
+                );
+
+
+            if (pedido.length === 0) {
+
+                mensaje.textContent =
+                    "Selecciona al menos un producto.";
+
+                return;
+
+            }
+
+
+            let total =
+                pedido.reduce(
+
+                    (suma, producto) =>
+
+                        suma +
+                        producto.precio *
+                        producto.cantidad,
+
+                    0
+
+                );
+
+
+            /* Guardar el pedido */
+
+            localStorage.setItem(
+
+                "ultimoPedido",
+
+                JSON.stringify(pedido)
+
+            );
+
+
+            mensaje.textContent =
+                "Compra realizada correctamente. Total: $" +
+                total;
+
+        }
+
+
+        /* =========================================
+           LIMPIAR PEDIDO
+        ========================================= */
+
+        function limpiarPedido() {
+
+
+            /* Vaciar la lista */
+
+            pedido = [];
+
+
+            /* Eliminar el pedido guardado */
+
+            localStorage.removeItem(
+                "ultimoPedido"
+            );
+
+
+            /* Actualizar la tabla */
+
+            mostrarPedido();
+
+
+            /* Mostrar mensaje */
+
+            document.getElementById(
+                "mensajeCompra"
+            ).textContent =
+                "Pedido limpiado. Puedes realizar uno nuevo.";
+
+        }
+
+
+        /* =========================================
+           VALIDACIÓN DEL FORMULARIO
+        ========================================= */
+
+        document
+            .getElementById(
+                "formularioContacto"
+            )
+            .addEventListener(
+                "submit",
+                function(event) {
+
+
+                    event.preventDefault();
+
+
+                    const nombre =
+                        document
+                            .getElementById("nombre")
+                            .value
+                            .trim();
+
+
+                    const correo =
+                        document
+                            .getElementById("correo")
+                            .value
+                            .trim();
+
+
+                    const mensaje =
+                        document
+                            .getElementById("mensaje")
+                            .value
+                            .trim();
+
+
+                    const resultado =
+                        document.getElementById(
+                            "mensajeFormulario"
+                        );
+
+
+                    /* Comprobar campos vacíos */
+
+                    if (
+
+                        nombre === "" ||
+
+                        correo === "" ||
+
+                        mensaje === ""
+
+                    ) {
+
+
+                        resultado.textContent =
+                            "Por favor, completa todos los campos.";
+
+                        return;
+
+                    }
+
+
+                    /* Guardar los datos */
+
+                    const datosContacto = {
+
+
+                        nombre: nombre,
+
+                        correo: correo,
+
+                        mensaje: mensaje
+
+                    };
+
+
+                    localStorage.setItem(
+
+                        "datosContacto",
+
+                        JSON.stringify(
+                            datosContacto
+                        )
+
+                    );
+
+
+                    resultado.textContent =
+                        "Formulario enviado correctamente.";
+
+
+                    /* Limpiar formulario */
+
+                    this.reset();
+
+
+                }
+            );
+
+
+    </script>
+
+
+</body>
+
+</html>
